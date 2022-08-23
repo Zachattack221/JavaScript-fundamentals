@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,14 @@
 </head>
 <!-- Created sections within HTML to associate with different phases or states of quiz. Id's and divisions set to easier isolate certain child elements -->
 <!-- button added to initialize testing phase -->
+
 <body>
     <section id="begin">
         <h2>Begin Quiz</h2>
-        <button>Start</button>
+        <p>This is a coding quiz that tests your knowledge of JavaScript related content. Answer the following questions
+            within the time limit, keeping in mind that each wrong answer will deduct 10 seconds from your remaining
+            time. Good luck!</p>
+        <button id="start-button">Start Quiz</button>
     </section>
 
     <section id="testing">
@@ -20,17 +25,22 @@
         <div id="questions-option">
         </div>
     </section>
-<!-- text entry input for initials, button for submission to high score log -->
+    <!-- text entry input for initials, button for submission to high score log -->
     <section id="finish">
         <h2>Enter Initials</h2>
         <input type="text" />
-        <button>Finish</button>
+        <button id="finish-button">Finish</button>
     </section>
     <section id="scoring">
-        <h2 id="">High Scores</h2>
+        <h2>High Scores</h2>
         <div id="high-scores">
+        </div>
+        <div id="ending-buttons">
+            <button id="back-button">Go Back</button>
+            <button id="clear-button">Clear HighScores</button>
         </div>
     </section>
     <script src="./script.js"></script>
 </body>
+
 </html>
