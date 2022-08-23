@@ -1,0 +1,6 @@
+/* Some reset styling added to base CSS page */
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+  }

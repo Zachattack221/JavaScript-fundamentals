@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/style.css" />
+    <title>JavaScript Coding Quiz</title>
+</head>
+<!-- Created sections within HTML to associate with different phases or states of quiz. Id's and divisions set to easier isolate certain child elements -->
+<!-- button added to initialize testing phase -->
+<body>
+    <section id="begin">
+        <h2>Begin Quiz</h2>
+        <button>Start</button>
+    </section>
+
+    <section id="testing">
+        <h2 id="question-name">Questions</h2>
+        <div id="questions"></div>
+    </section>
+<!-- text entry input for initials, button for submission to high score log -->
+    <section id="finish">
+        <h2>Enter Initials</h2>
+        <input type="text" />
+        <button>Finish</button>
+    </section>
+    <script src="./script.js"></script>
+</body>
+</html>
