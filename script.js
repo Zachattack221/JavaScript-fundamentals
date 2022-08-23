@@ -5,12 +5,14 @@ var beginEl = document.querySelector("#begin");
 var testingEl = document.querySelector("#testing");
 var finishEl = document.querySelector("#finish");
 var scoringEl = document.querySelector("#scoring");
+
 var startBtn = document.querySelector("#start-button");
 var backBtn = document.querySelector("#back-button");
 var clearBtn = document.querySelector("#clear-button");
 var finishBtn = document.querySelector("#finish-button");
+var viewScoresBtn = document.querySelector("#view-scores");
 
-var questionOptionEl = document.querySelector("#question-option");
+var questionOptionEl = document.querySelector("#questions-option");
 var questionEl = document.querySelector("#question-name");
 // made question order an array of objects, with possible answers in an array format for each question
 var questionOrder = [
@@ -70,29 +72,49 @@ function reset() {
 // function to handle time
 // high score - local storage?
 // <!-- TODO: add some sort of form element to store high scores -->
-// <!-- create buttons to navigate back to quiz start and to reset stored scores -->
+
+// <!-- created buttons to navigate back to quiz start and to reset stored scores -->
+
 startBtn.addEventListener("click", function() {
     displayQuestion();
     displayState();
+    // add function to start timer 
 });
 
 function displayQuestion() {
     state = 'testing';
     var question = questionOrder[num];
-    questionEl.textContent = question;
+    questionEl.textContent = question.title;
+    for (var i = 0; i < questionOrder[num].possibleAnswers.length; i++) {
+        var answerBtn = document.createElement("button");
+        answerBtn.innerHTML = questionOrder[num].possibleAnswers[i];
+        questionOptionEl.append(answerBtn);
+    }
 }
+// add event listener to answerBtn (will probably need to dynamically add an ID or class to target)
+// probably will need if (num < questionOrder.length) else display finish state
+// when answer btn clicked add + 1 to num and call displayQuestion again
+// answerBtn.addEventListener("click", function(event) {
+//     num + 1;
+//     displayQuestion();
+// });
 
 finishBtn.addEventListener("click", function() {
     state = "scoring";
+    displayState();
 });
 
 backBtn.addEventListener("click", function() {
     reset();
 });
 
+viewScoresBtn.addEventListener("click", function() {
+    state = "scoring"
+    displayState();
+});
 
-// resetBtn needs to trigger function to clear local storage
-// resetBtn.addEventListener("click", function() {
+// clearBtn needs to trigger function to clear local storage
+// clearBtn.addEventListener("click", function() {
     
 // });
 
