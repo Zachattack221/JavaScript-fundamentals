@@ -12,14 +12,14 @@ var clearBtn = document.querySelector("#clear-button");
 var finishBtn = document.querySelector("#finish-button");
 var viewScoresBtn = document.querySelector("#view-scores");
 
-var questionOptionEl = document.querySelector("#questions-option");
 var questionEl = document.querySelector("#question-name");
+var questionOptionEl = document.querySelector("#questions-option");
 // made question order an array of objects, with possible answers in an array format for each question
 var questionOrder = [
-    {title:'First', possibleAnswers: [1,2,3,4], correct: 4}, 
-    {title:'Second', possibleAnswers: [5,6,7,8], correct: 8},
-    {title:'Third', possibleAnswers: [9,10,11,12], correct: 12},
-    {title:'Fourth', possibleAnswers: [13,14,15,16], correct: 16},
+    { title: 'First', possibleAnswers: [1, 2, 3, 4], correct: 3 },
+    { title: 'Second', possibleAnswers: [5, 6, 7, 8], correct: 3 },
+    { title: 'Third', possibleAnswers: [9, 10, 11, 12], correct: 3 },
+    { title: 'Fourth', possibleAnswers: [13, 14, 15, 16], correct: 3 },
 ];
 
 var num = 0;
@@ -62,6 +62,7 @@ function reset() {
     state = 'begin';
     num = 0;
     init();
+    questionOptionEl.innerHTML = "";
 }
 
 // TODO: create different event listeners for start button, answer selection during quiz, and submit button for initials to high score board
@@ -75,47 +76,116 @@ function reset() {
 
 // <!-- created buttons to navigate back to quiz start and to reset stored scores -->
 
-startBtn.addEventListener("click", function() {
+startBtn.addEventListener("click", function () {
+    state = 'testing';
     displayQuestion();
     displayState();
+
     // add function to start timer 
 });
 
+// var answerBtn = document.createElement("button");
+// answerBtn.addEventListener("click", function () {
+//     if (num < questionOrder[num].possibleAnswers.length){
+//         num + 1;
+//         displayQuestion();
+//     }
+//     else {
+//     state = "finish"
+//     // end timer function
+// }
+// });
+
+
 function displayQuestion() {
     state = 'testing';
+    console.log(num);    // if (questionOrder[num].possibleAnswers.length ==)
     var question = questionOrder[num];
+    questionOptionEl.innerHTML = null;
     questionEl.textContent = question.title;
-    for (var i = 0; i < questionOrder[num].possibleAnswers.length; i++) {
+    for (answer of question.possibleAnswers) {
         var answerBtn = document.createElement("button");
-        answerBtn.innerHTML = questionOrder[num].possibleAnswers[i];
-        questionOptionEl.append(answerBtn);
-    }
+        answerBtn.textContent = answer;
+        answerBtn.addEventListener("click", checkAnswers);
+        questionOptionEl.appendChild(answerBtn);
+        answerBtn.classList.add('answerbtn');
+    };
+    
+};
+
+function checkAnswers () {
+    if (num >= questionOrder[num].possibleAnswers.length - 1) {
+                state = 'finish';
+                displayState();
+        } else {
+            num++;
+            displayQuestion();
+        }
 }
+
+
+
+
+// blah.addEventListener("click", function (event){
+    //     var element = event.target;
+    //     if (element.matches('h2')) {
+//         var index = Array.from(element.parentElement.children).indexOf(element);
+//         console.log(index);
+//         num++;
+
+//     if (num > questionOrder[num].possibleAnswers.length) {
+    //         state = 'finish';
+    //         displayState();
+    //     }
+    //     else {
+        //         displayQuestion();
+        //     }
+        // }
+        // });
+        // for (var i = 0; i < questionOrder[num].possibleAnswers.length; i++) {
+            //     answerBtn.innerHTML = questionOrder[num].possibleAnswers[i];
+            // }
+
+
+
 // add event listener to answerBtn (will probably need to dynamically add an ID or class to target)
 // probably will need if (num < questionOrder.length) else display finish state
 // when answer btn clicked add + 1 to num and call displayQuestion again
-// answerBtn.addEventListener("click", function(event) {
-//     num + 1;
-//     displayQuestion();
-// });
 
-finishBtn.addEventListener("click", function() {
+finishBtn.addEventListener("click", function () {
     state = "scoring";
     displayState();
 });
 
-backBtn.addEventListener("click", function() {
+
+backBtn.addEventListener("click", function () {
     reset();
 });
 
-viewScoresBtn.addEventListener("click", function() {
+viewScoresBtn.addEventListener("click", function () {
     state = "scoring"
     displayState();
 });
 
+
+// function startTimer() {
+//     timer = setInterval(() => {
+//         timerCount
+//     }, interval);
+// }
+
+
+init();
+
+
+
+// var answerBtn = document.querySelector(".choices");
+// answerBtn.addEventListener("click", function () {
+//     displayQuestion();
+// });
 // clearBtn needs to trigger function to clear local storage
 // clearBtn.addEventListener("click", function() {
-    
+
 // });
 
 // TODO: attach timer to quiz, initialized with start button element, set to subtract remaining time from counter with incorrect answer
@@ -124,7 +194,6 @@ viewScoresBtn.addEventListener("click", function() {
 
 
 // Set init() to trigger displayState() 
-init();
 
 // Write out each question and possible answers to pull from and insert
 // first : Accepted data types used within JavaScript DO NOT include:
