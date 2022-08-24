@@ -12,4 +12,4 @@ This goal of this project was to create a functional quiz covering javascript fu
 This project serves to showcase the ways in which JavaScript creates a more dynamic testing experience.
 
 ## Visuals
-![Javascript-fundamentals](LINK PLACEHOLDER)
+![Javascript-fundamentals](./assets/Screenshot%202022-08-24%20022109.png)
