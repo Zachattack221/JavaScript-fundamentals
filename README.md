@@ -6,7 +6,7 @@ JavaScript fundamentals challenge
 2. [Visuals](#visuals)
 
 ## Description
-[Link to live site](LINK PLACEHOLDER)
+[Link to live site](https://zachattack221.github.io/JavaScript-fundamentals/)
 
 This goal of this project was to create a functional quiz covering javascript fundamentals, one that allows users to select multiple choice answer choices in a timed format. 
 This project serves to showcase the ways in which JavaScript creates a more dynamic testing experience.
