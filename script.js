@@ -12,16 +12,18 @@ var clearBtn = document.querySelector("#clear-button");
 var finishBtn = document.querySelector("#finish-button");
 var viewScoresBtn = document.querySelector("#view-scores");
 
+var timerElement = document.querySelector("#timer");
 var questionEl = document.querySelector("#question-name");
 var questionOptionEl = document.querySelector("#questions-option");
 // made question order an array of objects, with possible answers in an array format for each question
 var questionOrder = [
-    { title: 'First', possibleAnswers: [1, 2, 3, 4], correct: 3 },
-    { title: 'Second', possibleAnswers: [5, 6, 7, 8], correct: 3 },
-    { title: 'Third', possibleAnswers: [9, 10, 11, 12], correct: 3 },
-    { title: 'Fourth', possibleAnswers: [13, 14, 15, 16], correct: 3 },
+    { title: 'First', possibleAnswers: [1, 2, 3, 4], correct: 4 },
+    { title: 'Second', possibleAnswers: [5, 6, 7, 8], correct: 8 },
+    { title: 'Third', possibleAnswers: [9, 10, 11, 12], correct: 12 },
+    { title: 'Fourth', possibleAnswers: [13, 14, 15, 16], correct: 16 },
 ];
 
+var timerCount = 10;
 var num = 0;
 
 // set up logic to switch display state between begin, testing, finish, and scores
@@ -40,6 +42,9 @@ function displayState() {
         scoringEl.style.display = 'none';
     }
     if (state === 'finish') {
+        clearInterval(timer);
+        timerElement.textContent = '';
+        timerCount = 10;
         beginEl.style.display = 'none';
         testing.style.display = 'none';
         finishEl.style.display = 'block';
@@ -80,26 +85,11 @@ startBtn.addEventListener("click", function () {
     state = 'testing';
     displayQuestion();
     displayState();
-
-    // add function to start timer 
+    startTimer();
 });
-
-// var answerBtn = document.createElement("button");
-// answerBtn.addEventListener("click", function () {
-//     if (num < questionOrder[num].possibleAnswers.length){
-//         num + 1;
-//         displayQuestion();
-//     }
-//     else {
-//     state = "finish"
-//     // end timer function
-// }
-// });
-
 
 function displayQuestion() {
     state = 'testing';
-    console.log(num);    // if (questionOrder[num].possibleAnswers.length ==)
     var question = questionOrder[num];
     questionOptionEl.innerHTML = null;
     questionEl.textContent = question.title;
@@ -113,44 +103,23 @@ function displayQuestion() {
     
 };
 
-function checkAnswers () {
+function checkAnswers (event) {
+    var selected = event.target.textContent;
+    var correctAnswer = questionOrder[num].correct;
+    console.log(selected);
+    console.log(correctAnswer);
     if (num >= questionOrder[num].possibleAnswers.length - 1) {
                 state = 'finish';
                 displayState();
-        } else {
+        } else if (selected === correctAnswer) {
+            num++;
+            displayQuestion();
+        } else if (selected !== correctAnswer) {
+            timerCount = timerCount - 5;
             num++;
             displayQuestion();
         }
 }
-
-
-
-
-// blah.addEventListener("click", function (event){
-    //     var element = event.target;
-    //     if (element.matches('h2')) {
-//         var index = Array.from(element.parentElement.children).indexOf(element);
-//         console.log(index);
-//         num++;
-
-//     if (num > questionOrder[num].possibleAnswers.length) {
-    //         state = 'finish';
-    //         displayState();
-    //     }
-    //     else {
-        //         displayQuestion();
-        //     }
-        // }
-        // });
-        // for (var i = 0; i < questionOrder[num].possibleAnswers.length; i++) {
-            //     answerBtn.innerHTML = questionOrder[num].possibleAnswers[i];
-            // }
-
-
-
-// add event listener to answerBtn (will probably need to dynamically add an ID or class to target)
-// probably will need if (num < questionOrder.length) else display finish state
-// when answer btn clicked add + 1 to num and call displayQuestion again
 
 finishBtn.addEventListener("click", function () {
     state = "scoring";
@@ -168,32 +137,21 @@ viewScoresBtn.addEventListener("click", function () {
 });
 
 
-// function startTimer() {
-//     timer = setInterval(() => {
-//         timerCount
-//     }, interval);
-// }
-
-
-init();
-
-
-
-// var answerBtn = document.querySelector(".choices");
-// answerBtn.addEventListener("click", function () {
-//     displayQuestion();
-// });
-// clearBtn needs to trigger function to clear local storage
-// clearBtn.addEventListener("click", function() {
-
-// });
-
-// TODO: attach timer to quiz, initialized with start button element, set to subtract remaining time from counter with incorrect answer
-// TODO: trigger timer to end quiz when time = 0
-
-
+function startTimer() {
+    timer = setInterval(function () {
+        timerCount--;
+        timerElement.textContent = timerCount;
+        if (timerCount === 0) {
+            clearInterval(timer);
+            state = "finish";
+            displayState();
+        }
+    }, 1000);
+}
 
 // Set init() to trigger displayState() 
+init();
+
 
 // Write out each question and possible answers to pull from and insert
 // first : Accepted data types used within JavaScript DO NOT include:
