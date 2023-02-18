@@ -77,16 +77,6 @@ function reset() {
     questionOptionEl.innerHTML = "";
 }
 
-// TODO: create different event listeners for start button, answer selection during quiz, and submit button for initials to high score board
-
-// start quiz - start timer, present next question
-// event listener - on submit to go to next question?
-// score validator - if correct go to next question, else subtract 10
-// function to handle time
-// high score - local storage?
-// <!-- TODO: add some sort of form element to store high scores -->
-
-// <!-- created buttons to navigate back to quiz start and to reset stored scores -->
 
 startBtn.addEventListener("click", function () {
     state = 'testing';
