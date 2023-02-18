@@ -18,7 +18,10 @@ var userScore = document.querySelector("#user-score");
 var timerElement = document.querySelector("#timer");
 var questionEl = document.querySelector("#question-name");
 var questionOptionEl = document.querySelector("#questions-option");
+
 // made question order an array of objects, with possible answers in an array format for each question
+
+
 var questionOrder = [
     { title: 'Accepted data types used within JavaScript DO NOT include: ', possibleAnswers: ['1. booleans', '2. strings', '3. numbers', '4. alerts'], correct: '4. alerts' },
     { title: 'The condition in an if/else statement is enclosed within ________.', possibleAnswers: ['1. square brackets', '2. quotation marks', '3. curly brackets', '4. parentheses'], correct: '4. parentheses' },
@@ -30,6 +33,7 @@ var timerCount = 60;
 var num = 0;
 var score;
 var highscores = [];
+
 // set up logic to switch display state between begin, testing, finish, and scores
 
 function displayState() {
@@ -77,7 +81,6 @@ function reset() {
     questionOptionEl.innerHTML = "";
 }
 
-
 startBtn.addEventListener("click", function () {
     state = 'testing';
     displayQuestion();
@@ -97,7 +100,6 @@ function displayQuestion() {
         questionOptionEl.appendChild(answerBtn);
         // answerBtn.classList.add('answerbtn');
     };
-
 };
 
 function checkAnswers(event) {
@@ -122,6 +124,7 @@ function checkAnswers(event) {
         }
     }
 }
+// Adding event listeners for various click options on main page
 
 clearBtn.addEventListener("click", function () {
     clearInterval(timer);
@@ -152,7 +155,7 @@ viewScoresBtn.addEventListener("click", function () {
     displayState();
 });
 
-
+// Using built in setInterval function to establish timer countdown
 function startTimer() {
     timer = setInterval(function () {
         timerCount--;
@@ -165,6 +168,7 @@ function startTimer() {
     }, 1000);
 }
 
+// Logic to push saved scores and user initials to storedScore array
 var storedScore = [];
 function setHighScore() {
     var initials = initialsEl.value;
@@ -174,6 +178,7 @@ function setHighScore() {
     console.log(storedScore)
 }
 
+// Logic to pull and parse stored JSON user/score info and then display on screen
 function getHighScore() {
     console.log(storedScore)
     highScoresEl.textContent = "";

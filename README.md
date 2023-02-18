@@ -1,5 +1,4 @@
 # JavaScript-fundamentals
-JavaScript fundamentals challenge
 
 ## Table of Contents
 1. [Description](#description)
